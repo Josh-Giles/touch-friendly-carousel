@@ -1,0 +1,40 @@
+body{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    background-color: #000000;
+    justify-content: center;
+    align-items: center;
+}
+
+.carouselContainer{
+    display: flex;
+    width: 60vw;
+    height: 33.7vw;
+    position: relative;
+    overflow: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    display: flex; 
+    overflow-x: auto;   
+
+    cursor: grab;
+}
+
+.carouselContainer::-webkit-scrollbar {
+    display: none;
+}
+
+.carouselImage{
+    flex-shrink: 0;
+    width: 100%;
+    height: auto;
+    position: relative;   
+    display: flex;
+}
+
+.grabbing{
+    cursor:grabbing;
+}
