@@ -9,17 +9,17 @@ function momentumScroll(){
     scrollVelocity *= 0.95;
 
     if (approxImageLocations.includes(Math.round(carousel.scrollLeft/100)*100)) {
-        scrollToNearest(carousel.scrollLeft);
+        scrollToNearestImage(carousel.scrollLeft);
     }
     else if (Math.abs(scrollVelocity) > 0.5){       
         momentumID = requestAnimationFrame(momentumScroll);
     }
     else{
-        scrollToNearest(carousel.scrollLeft);
+        scrollToNearestImage(carousel.scrollLeft);
     }
 }
 
-function scrollToNearest(currentScrollPosition){
+function scrollToNearestImage(currentScrollPosition){
     const output = imageLocations.reduce((prev, curr) => Math.abs(curr - currentScrollPosition) < Math.abs(prev - currentScrollPosition) ? curr : prev);
     carousel.scroll({top:0, left:output, behavior:'smooth'}); 
 }
@@ -54,13 +54,14 @@ document.addEventListener("DOMContentLoaded", function() {
     carousel.addEventListener("mouseleave", function(){
         carouselBeingClicked = false;
         carousel.classList.remove("grabbing");
+        scrollToNearestImage(carousel.scrollLeft);
     });
 
     carousel.addEventListener("mousemove", function(event){
         if (carouselBeingClicked){
             event.preventDefault();
             const currentPosition = event.pageX - carousel.offsetLeft;
-            const amountToScroll = (currentPosition - startPosition) * 1.1;
+            const amountToScroll = (currentPosition - startPosition) * 0.8;
             var previousLeftScroll = carousel.scrollLeft;
             carousel.scrollLeft = scrollLeft - amountToScroll;
             scrollVelocity = carousel.scrollLeft - previousLeftScroll;         
