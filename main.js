@@ -1,17 +1,11 @@
 var momentumID;
 var carousel;
-var imageLocations = [];
-var approxImageLocations = [];
-
 
 function momentumScroll(){
     carousel.scrollLeft += scrollVelocity;
     scrollVelocity *= 0.95;
 
-    if (approxImageLocations.includes(Math.round(carousel.scrollLeft/100)*100)) {
-        scrollToNearestImage(carousel.scrollLeft);
-    }
-    else if (Math.abs(scrollVelocity) > 0.5){       
+    if (Math.abs(scrollVelocity) > 0.5){       
         momentumID = requestAnimationFrame(momentumScroll);
     }
     else{
@@ -20,8 +14,15 @@ function momentumScroll(){
 }
 
 function scrollToNearestImage(currentScrollPosition){
-    const output = imageLocations.reduce((prev, curr) => Math.abs(curr - currentScrollPosition) < Math.abs(prev - currentScrollPosition) ? curr : prev);
-    carousel.scroll({top:0, left:output, behavior:'smooth'}); 
+    var imageLocations = []
+    for (let image of document.getElementsByClassName("carouselImage")) {
+        imageLocations.push(image.offsetLeft);
+    }
+
+    if (!imageLocations.includes(carousel.scrollLeft)){
+        const output = imageLocations.reduce((prev, curr) => Math.abs(curr - currentScrollPosition) < Math.abs(prev - currentScrollPosition) ? curr : prev);
+        carousel.scroll({top:0, left:output, behavior:'smooth'}); 
+    }
 }
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -31,10 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let scrollLeft;
     let carouselBeingClicked = false;
 
-    for (let image of document.getElementsByClassName("carouselImage")) {
-        imageLocations.push(image.offsetLeft);
-        approxImageLocations.push(Math.round(image.offsetLeft/100)*100)
-    }
+
 
     carousel.addEventListener("mousedown", function(event){
         carouselBeingClicked = true;
