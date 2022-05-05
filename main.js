@@ -5,7 +5,14 @@ function momentumScroll(){
     carousel.scrollLeft += scrollVelocity;
     scrollVelocity *= 0.95;
 
-    if (Math.abs(scrollVelocity) > 0.5){       
+    var imageLocations = []
+    for (let image of document.getElementsByClassName("carouselImage")) {
+        imageLocations.push(Math.round(image.offsetLeft/100)*100);
+    }
+    if (imageLocations.includes(Math.round(carousel.scrollLeft/100) * 100) || imageLocations.includes((Math.round(carousel.scrollLeft/100) * 100) + 100) || imageLocations.includes((Math.round(carousel.scrollLeft/100) * 100) - 100)){
+        scrollToNearestImage(carousel.scrollLeft);
+    }
+    else if (Math.abs(scrollVelocity) > 0.5){       
         momentumID = requestAnimationFrame(momentumScroll);
     }
     else{
@@ -32,21 +39,19 @@ document.addEventListener("DOMContentLoaded", function() {
     let scrollLeft;
     let carouselBeingClicked = false;
 
-
-
     carousel.addEventListener("mousedown", function(event){
         carouselBeingClicked = true;
         carousel.classList.add("grabbing");
-        startPosition = event.pageX - carousel.offsetLeft
-        scrollLeft = carousel.scrollLeft
-        cancelAnimationFrame(momentumID); 
+        startPosition = event.pageX - carousel.offsetLeft;
+        scrollLeft = carousel.scrollLeft;
+        cancelAnimationFrame(momentumID);
     });
 
     carousel.addEventListener("mouseup", function(){
         carouselBeingClicked = false;
         carousel.classList.remove("grabbing");
         cancelAnimationFrame(momentumID);
-        momentumID = requestAnimationFrame(momentumScroll)
+        momentumID = requestAnimationFrame(momentumScroll);
     });
 
     carousel.addEventListener("mouseleave", function(){
@@ -62,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const amountToScroll = (currentPosition - startPosition) * 0.8;
             var previousLeftScroll = carousel.scrollLeft;
             carousel.scrollLeft = scrollLeft - amountToScroll;
-            scrollVelocity = carousel.scrollLeft - previousLeftScroll;         
+            scrollVelocity = carousel.scrollLeft - previousLeftScroll;
         }
     })
 });
