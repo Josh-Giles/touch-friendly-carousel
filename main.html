@@ -7,15 +7,17 @@
         <script src="main.js"></script>
     </head>
     <body>
-
-        <section id="carouselContainer" class="carouselContainer">
-            <img width="16" height="9" src="Resources/RC125.jpg" alt="Motorcycle1" class="carouselImage"/>
-            <img width="16" height="9" src="Resources/RC125Dark.jpg" alt="Motorcycle2" class="carouselImage"/>
-            <img width="16" height="9" src="Resources/RC390.jpg" alt="Motorcycle3" class="carouselImage"/>
-            <img width="16" height="9" src="Resources/superduke1.jpg" alt="Motorcycle4" class="carouselImage"/>
-            <img width="16" height="9" src="Resources/superduke2.jpg" alt="Motorcycle5" class="carouselImage"/>
-            <img width="16" height="9" src="Resources/SDRWP.jpg" alt="Motorcycle6" class="carouselImage"/>
-        </section>
-
+        <div style="position:relative;">
+            <button type="button" class="carouselNavButton carouselNavButton--right"><</button>
+            <section id="carouselContainer" class="carouselContainer">            
+                <img width="16" height="9" src="Resources/RC125.jpg" alt="Motorcycle1" class="carouselImage"/>
+                <img width="16" height="9" src="Resources/RC125Dark.jpg" alt="Motorcycle2" class="carouselImage"/>
+                <img width="16" height="9" src="Resources/RC390.jpg" alt="Motorcycle3" class="carouselImage"/>
+                <img width="16" height="9" src="Resources/superduke1.jpg" alt="Motorcycle4" class="carouselImage"/>
+                <img width="16" height="9" src="Resources/superduke2.jpg" alt="Motorcycle5" class="carouselImage"/>
+                <img width="16" height="9" src="Resources/SDRWP.jpg" alt="Motorcycle6" class="carouselImage"/> 
+            </section>
+            <button type="button" class="carouselNavButton carouselNavButton--left">></button>
+        </div>
     </body>
 </html>

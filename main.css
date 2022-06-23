@@ -35,6 +35,28 @@ body{
     display: flex;
 }
 
+.carouselNavButton{
+    position: absolute;
+    top:44%;
+    width: 60px;
+    height: 60px;
+    background-color: rgba(97,96,96,.32);
+    border-radius: 50%;
+    cursor:pointer;
+    color: #ffffff;
+    border:none;
+    font-size: 30px;
+    z-index:999;
+}
+
+.carouselNavButton--left{
+    right: 30px;
+}
+
+.carouselNavButton--right{
+    left: 30px;
+}
+
 .grabbing{
     cursor:grabbing;
 }

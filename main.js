@@ -9,6 +9,7 @@ function momentumScroll(){
     for (let image of document.getElementsByClassName("carouselImage")) {
         imageLocations.push(Math.round(image.offsetLeft/100)*100);
     }
+    //I think I could do this in a slightly different way that woudl be more efficient, this is one for me to look into.
     if (imageLocations.includes(Math.round(carousel.scrollLeft/100) * 100) || imageLocations.includes((Math.round(carousel.scrollLeft/100) * 100) + 100) || imageLocations.includes((Math.round(carousel.scrollLeft/100) * 100) - 100)){
         scrollToNearestImage(carousel.scrollLeft);
     }
